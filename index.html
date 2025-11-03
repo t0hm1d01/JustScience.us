@@ -1,203 +1,582 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Just Science - Spreading the Love of Science</title>
-    
-    <!-- Tailwind CSS -->
+    <title>Just Science | Spreading the Love of Science</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    
     <style>
-        /* Use the Inter font family */
+        /* Custom styles for the gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #10b981, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Custom style for the gradient icon wrapper */
+        .gradient-icon-wrapper {
+            background: linear-gradient(135deg, #10b981, #3b82f6); /* Green to Blue */
+        }
+        /* Custom style for the Hero button */
+        .hero-btn-gradient {
+            background: linear-gradient(90deg, #60e3b9, #38bdf8);
+        }
+        /* Custom style for the Join Team CTA */
+        .join-cta-gradient {
+            background: linear-gradient(135deg, #60e3b9, #38bdf8, #8b5cf6);
+        }
+        /* Custom style for the Quote Banner */
+        .quote-banner-gradient {
+            background: linear-gradient(145deg, #e3f2fd, #ffffff); /* Soft gradient */
+        }
+        /* Font setup (You may need to link 'Inter' if not locally available) */
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Style for the hero section background gradient */
-        .hero-gradient-bg {
-            background-image: radial-gradient(circle at 50% 0%, rgba(118, 207, 243, 0.1), rgba(255, 255, 255, 0) 30%);
-        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="min-h-screen bg-white text-gray-800 antialiased">
 
-    <!-- Header & Navigation -->
-    <header id="header" class="bg-white/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <a href="#home" class="text-2xl font-bold text-gray-900">
-                    Just<span class="text-blue-600">Science</span>
-                </a>
+    <script>
+        // Lucide Icon Renderer
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden lg:flex items-center space-x-8">
-                    <a href="#mission" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Mission</a>
-                    <a href="#programs" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Programs</a>
-                    <a href="#media" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Media</a>
-                    <a href="#team" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Team</a>
-                    <a href="#impact" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Impact</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors duration-300">Contact</a>
-                </nav>
+            // Mobile Menu Logic Initialization
+            const menuButton = document.querySelector('header .lg\\:hidden'); // Selects the 'menu' icon button
+            const mobileMenu = document.getElementById('mobile-menu');
 
-                <!-- Get Involved Button (Desktop) -->
-                <div class="hidden lg:block">
-                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300">
-                        Get Involved
+            // 1. Function to open the menu
+            function openMobileMenu() {
+                mobileMenu.classList.remove('-translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden'; // Prevents scrolling behind the menu
+            }
+
+            // 2. Function to close the menu (Exposed globally for onclick events)
+            window.closeMobileMenu = function() {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('-translate-x-full');
+                document.body.style.overflow = 'auto'; // Re-enables scrolling
+            }
+
+            // 3. Attach the click listener to the 'menu' icon button
+            if (menuButton) {
+                menuButton.addEventListener('click', openMobileMenu);
+            }
+        });
+    </script>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-100 h-16 flex items-center px-4 md:px-12">
+        <div class="flex items-center justify-between w-full max-w-7xl mx-auto">
+            <a href="#" class="text-2xl font-bold text-gray-800 tracking-tight">
+                Just<span class="text-blue-600">Science</span>
+            </a>
+
+            <nav class="hidden lg:flex space-x-8 text-gray-600 font-medium">
+                <a href="#mission" class="hover:text-blue-600 transition duration-150">Mission</a>
+                <a href="#programs" class="hover:text-blue-600 transition duration-150">Programs</a>
+                <a href="#media" class="hover:text-blue-600 transition duration-150">Media</a>
+                <a href="#team" class="hover:text-blue-600 transition duration-150">Team</a>
+                <a href="#impact" class="hover:text-blue-600 transition duration-150">Impact</a>
+                <a href="#contact" class="hover:text-blue-600 transition duration-150">Contact</a>
+            </nav>
+
+            <button class="hidden sm:block text-sm font-semibold py-2 px-4 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md">
+                Get Involved
+            </button>
+
+            <button class="lg:hidden text-gray-600">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <nav id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-white z-[60] transform -translate-x-full transition-transform duration-300 lg:hidden p-4 pt-16 shadow-2xl">
+        <div class="space-y-4 text-center">
+            <a href="#mission" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Mission</a>
+            <a href="#programs" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Programs</a>
+            <a href="#media" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Media</a>
+            <a href="#team" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Team</a>
+            <a href="#impact" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Impact</a>
+            <a href="#contact" class="block py-3 text-xl font-bold text-gray-800 hover:text-blue-600 transition duration-150 border-b border-gray-100" onclick="closeMobileMenu()">Contact</a>
+        </div>
+
+        <div class="mt-8 text-center">
+            <button class="text-sm font-semibold py-3 px-8 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors shadow-md w-3/4" onclick="closeMobileMenu()">
+                Get Involved
+            </button>
+        </div>
+
+        <button id="close-menu-btn" class="absolute top-4 right-4 text-gray-600" onclick="closeMobileMenu()">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+    </nav>
+    <section class="text-center py-16 md:py-24 px-4 bg-gray-50">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-flex items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-medium text-blue-600 ring-1 ring-inset ring-blue-200 mb-8">
+                <i data-lucide="lightbulb" class="w-4 h-4 mr-1"></i> Student-Led Science Initiative
+            </span>
+
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                Spreading the <span class="gradient-text">Love of Science</span>
+            </h1>
+
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-10">
+                We're a passionate group of students bringing hands-on science experiences directly to communities, inspiring the next generation of scientists and innovators.
+            </p>
+
+            <div class="flex justify-center space-x-8 mb-12">
+                <div class="text-center">
+                    <i data-lucide="users" class="w-8 h-8 text-blue-500 mx-auto mb-1"></i>
+                    <p class="text-xl font-bold text-gray-800">1+</p>
+                    <p class="text-sm text-gray-500">Communities Reached</p>
+                </div>
+                <div class="text-center">
+                    <i data-lucide="heart" class="w-8 h-8 text-red-400 mx-auto mb-1"></i>
+                    <p class="text-xl font-bold text-gray-800">20+</p>
+                    <p class="text-sm text-gray-500">Kids Inspired</p>
+                </div>
+                <div class="text-center">
+                    <i data-lucide="star" class="w-8 h-8 text-purple-400 mx-auto mb-1"></i>
+                    <p class="text-xl font-bold text-gray-800">5+</p>
+                    <p class="text-sm text-gray-500">Active Volunteers</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button 
+                    class="hero-btn-gradient flex items-center text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-[1.03]"
+                >
+                    Explore Our Programs
+                    <i data-lucide="zap" class="w-4 h-4 ml-2"></i>
+                </button>
+                <button class="text-gray-700 font-semibold py-3 px-8 rounded-full border border-gray-300 bg-white hover:bg-gray-100 transition-colors shadow-sm">
+                    Join Our Mission
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="py-20 md:py-28 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">Our Vision & Values</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    To make science education accessible, engaging, and inspiring by bringing hands-on learning experiences directly to communities across the country. We believe every child deserves the chance to fall in love with science.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 mt-12">
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Passion for Science</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We believe science should be accessible, exciting, and inspiring for everyone, regardless of background.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Community First</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We go directly to communities, meeting people where they are and building lasting relationships.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="lightbulb" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Hands-On Learning</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Interactive experiments and demonstrations make complex concepts easy to understand and remember.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="zap" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Student Leadership</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Led by students, for the community - we understand the power of peer-to-peer learning.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-blue-50 py-16 px-4 md:px-12">
+        <div 
+            class="max-w-4xl mx-auto p-8 rounded-3xl shadow-xl text-center quote-banner-gradient"
+        >
+            <p class="text-2xl italic font-light text-gray-700 leading-relaxed">
+                "Science is not meant to be kept in the lab; it's the toolbox for citizenship. To make it accessible is to empower every mind to question, understand, and shape the world they live in."
+            </p>
+            <p class="mt-4 text-sm font-semibold text-blue-600">- Tahmid H.</p>
+        </div>
+    </div>
+
+    <section id="programs" class="py-20 md:py-28 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">Hands-On Programs & Events</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    From mobile science labs to rocket launch events, we create unforgettable experiences that make science accessible and exciting for everyone.
+                </p>
+            </div>
+
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">Upcoming Events</h3>
+                <p class="text-gray-600 mb-10">Join us at our next community science events. All are welcome, and admission is always free!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                Event
+                            </span>
+                            <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Event Title Placeholder</h4>
+                        <div class="space-y-1 text-gray-500 text-sm">
+                            <div class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i> N/A</div>
+                            <div class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> TBD</div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                Event
+                            </span>
+                            <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Event Title Placeholder</h4>
+                        <div class="space-y-1 text-gray-500 text-sm">
+                            <div class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i> N/A</div>
+                            <div class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> TBD</div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-left">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-xs font-semibold text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+                                Event
+                            </span>
+                            <i data-lucide="calendar" class="w-5 h-5 text-gray-400"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">Event Title Placeholder</h4>
+                        <div class="space-y-1 text-gray-500 text-sm">
+                            <div class="flex items-center"><i data-lucide="calendar" class="w-4 h-4 mr-2"></i> N/A</div>
+                            <div class="flex items-center"><i data-lucide="map-pin" class="w-4 h-4 mr-2"></i> TBD</div>
+                        </div>
+                    </div>
+                </div>
+
+                <button 
+                    class="mt-12 flex items-center justify-center mx-auto text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-[1.03] hero-btn-gradient"
+                >
+                    View All Events
+                    <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="media" class="py-20 md:py-28 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">Gallery & Social Impact</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    See our mission in action! From explosive chemistry demos to heartwarming community moments, these images and videos capture the magic of science education.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                    <div class="mx-auto p-3 rounded-xl w-14 h-14 flex items-center justify-center" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);">
+                        <i data-lucide="instagram" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-3xl font-extrabold text-gray-800 mt-4">2.8K</p>
+                    <p class="text-sm text-gray-500 mb-4">Followers</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold py-2 px-4 rounded-full border border-gray-300 bg-white hover:bg-gray-100">
+                        Follow @JustScience <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="lg:hidden">
-                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
-                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                        </svg>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                    <div class="mx-auto p-3 rounded-xl w-14 h-14 flex items-center justify-center bg-red-600">
+                        <i data-lucide="youtube" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-3xl font-extrabold text-gray-800 mt-4">--</p>
+                    <p class="text-sm text-gray-500 mb-4">Subscribers</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold py-2 px-4 rounded-full border border-gray-300 bg-white hover:bg-gray-100">
+                        Follow @JustScience <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                    <div class="mx-auto p-3 rounded-xl w-14 h-14 flex items-center justify-center" style="background: linear-gradient(45deg, #a855f7, #ec4899);">
+                        <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-3xl font-extrabold text-gray-800 mt-4">4.1K</p>
+                    <p class="text-sm text-gray-500 mb-4">Followers</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-semibold py-2 px-4 rounded-full border border-gray-300 bg-white hover:bg-gray-100">
+                        Follow @JustScience <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-2 text-sm font-semibold text-gray-600">
+                <button class="py-2 px-5 rounded-full bg-green-200 text-green-800 shadow-md transition-colors">All Media <span class="text-xs ml-1 font-bold">0</span></button>
+                <button class="py-2 px-5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">Photos <span class="text-xs ml-1 font-bold">0</span></button>
+                <button class="py-2 px-5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">Videos <span class="text-xs ml-1 font-bold">0</span></button>
+                <button class="py-2 px-5 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">Press <span class="text-xs ml-1 font-bold">0</span></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-20 md:py-28 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">The Student Leaders</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    We’re a diverse group of passionate students from various scientific disciplines, united by our mission to make science accessible and exciting for everyone.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+                    <div class="w-full h-48 bg-gray-900 rounded-t-xl mb-4 flex items-center justify-center"></div>
+
+                    <div class="w-full text-left">
+                        <h4 class="text-xl font-bold text-gray-800 mt-1">Tom Lan</h4>
+                        <p class="text-green-500 font-semibold text-sm mb-3">Founder</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Started JustScience to bridge the gap between academic science and community engagement. Spends his free time submerged in chemicals and math/physics.</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Chemistry Demos</span>
+                            <span class="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Program Development</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+                    <div class="w-full h-48 bg-gray-200 rounded-t-xl mb-4 flex items-center justify-center">
+                        <i data-lucide="user" class="w-16 h-16 text-gray-400"></i>
+                    </div>
+
+                    <div class="w-full text-left">
+                        <h4 class="text-xl font-bold text-gray-800 mt-1">Engjell Dosti</h4>
+                        <p class="text-green-500 font-semibold text-sm mb-3">Founder</p>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">Started JustScience to "Grow my passion for stem inspired to me by my teacher Dr. St. Juste, and I want to share this world of intricate problems with little kids aspiring to be scientists. PS. I'm a marathoner"</p>
+
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Physics</span>
+                            <span class="text-xs font-medium text-blue-700 bg-blue-50 px-3 py-1 rounded-full">Marathon Running</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div 
+                class="join-cta-gradient mt-20 p-10 rounded-2xl text-center shadow-2xl max-w-5xl mx-auto"
+            >
+                <h3 class="text-3xl font-bold text-white mb-3">Want to Join Our Team?</h3>
+                <p class="text-white/90 mb-8 max-w-2xl mx-auto">
+                    We're always looking for passionate students who want to make a difference in science education. Join us and help spread the love of science!
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <button class="text-blue-600 font-semibold py-3 px-6 rounded-full bg-white hover:bg-gray-100 transition-colors shadow-md">
+                        Apply to Join
+                    </button>
+                    <button class="text-white font-semibold py-3 px-6 rounded-full border border-white/50 hover:bg-white/10 transition-colors">
+                        Learn More
                     </button>
                 </div>
             </div>
         </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-md">
-            <nav class="px-4 pt-2 pb-4 space-y-2">
-                <a href="#mission" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Mission</a>
-                <a href="#programs" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Programs</a>
-                <a href="#media" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Media</a>
-                <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Team</a>
-                <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Impact</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-blue-600 hover:bg-gray-100">Contact</a>
-                <div class="mt-4">
-                     <a href="#" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-300">
-                        Get Involved
-                    </a>
-                </div>
-            </nav>
-        </div>
-    </header>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="home" class="relative min-h-screen flex items-center justify-center pt-24 pb-12 hero-gradient-bg">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                
-                <!-- Student-Led Initiative Tag -->
-                <div class="inline-flex items-center bg-blue-100 text-blue-700 font-semibold px-4 py-1.5 rounded-full text-sm mb-6">
-                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
-                    Student-Led Science Initiative
-                </div>
-                
-                <!-- Main Heading -->
-                <h1 class="text-5xl md:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
-                    Spreading the <br class="md:hidden">
-                    <span class="bg-gradient-to-r from-teal-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                        Love of Science
-                    </span>
-                </h1>
-                
-                <!-- Subheading -->
-                <p class="max-w-3xl mx-auto text-lg md:text-xl text-gray-600 mb-10">
-                    We're a passionate group of students bringing hands-on science experiences directly to communities, inspiring the next generation of scientists and innovators.
+    <section id="impact" class="py-20 md:py-28 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">Our Impact</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Numbers tell a story, but the real impact is in the curiosity we spark and the passion for learning we ignite in every community we visit.
                 </p>
-                
-                <!-- Stats Section -->
-                <div class="flex flex-wrap justify-center gap-6 md:gap-12 mb-12">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                            <i data-lucide="users" class="text-blue-600"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-xl text-gray-900">1+</p>
-                            <p class="text-gray-500">Communities Reached</p>
-                        </div>
-                    </div>
-                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
-                            <i data-lucide="heart" class="text-red-500"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-xl text-gray-900">20+</p>
-                            <p class="text-gray-500">Kids Inspired</p>
-                        </div>
-                    </div>
-                     <div class="flex items-center space-x-3">
-                        <div class="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-                            <i data-lucide="star" class="text-purple-600"></i>
-                        </div>
-                        <div>
-                            <p class="font-bold text-xl text-gray-900">5+</p>
-                            <p class="text-gray-500">Active Volunteers</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <a href="#programs" class="bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold py-3 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-shadow transform hover:scale-105 duration-300 flex items-center space-x-2">
-                        <span>Explore Our Programs</span>
-                        <i data-lucide="rocket" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#mission" class="bg-white border-2 border-gray-300 text-gray-700 font-semibold py-3 px-8 rounded-full text-lg hover:bg-gray-100 hover:border-gray-400 transition-all duration-300">
-                        Join Our Mission
-                    </a>
-                </div>
-                
             </div>
-        </section>
-        
-        <!-- Placeholder sections for navigation links -->
-        <section id="mission" class="py-24 bg-white"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Our Mission</h2></div></section>
-        <section id="programs" class="py-24"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Our Programs</h2></div></section>
-        <section id="media" class="py-24 bg-white"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Media</h2></div></section>
-        <section id="team" class="py-24"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Our Team</h2></div></section>
-        <section id="impact" class="py-24 bg-white"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Our Impact</h2></div></section>
-        <section id="contact" class="py-24"><div class="container mx-auto text-center"><h2 class="text-3xl font-bold">Contact Us</h2></div></section>
 
-    </main>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-12">
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4">
+                        <i data-lucide="users" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">20</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Students Reached</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Children and teens engaged through our programs</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4">
+                        <i data-lucide="map-pin" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">1</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Communities Visited</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Schools, libraries, and community centers</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #f87171, #ef4444);">
+                        <i data-lucide="heart" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">100%</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Positive Feedback</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Of participants say they love science more</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #facc15, #f59e0b);">
+                        <i data-lucide="star" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">2</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Experiments Performed</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Different hands-on activities demonstrated</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #9333ea, #c084fc);">
+                        <i data-lucide="trophy" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">0</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Awards Won</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Recognition for our community impact</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="p-3 rounded-xl shadow-lg inline-flex items-center justify-center mb-4" style="background: linear-gradient(135deg, #38bdf8, #2563eb);">
+                        <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <p class="text-4xl font-extrabold text-gray-800 mb-1">5</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Active Volunteers</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">Passionate students making a difference</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200">
-        <div class="container mx-auto py-8 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-gray-500">&copy; 2023 Just Science. All Rights Reserved.</p>
+    <section id="get-involved" class="py-20 md:py-28 px-4 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    <span class="gradient-text">Join the Movement</span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Ready to join our mission? Whether you want to volunteer, request a visit, or partner with us, we'd love to hear from you!
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-12">
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="users" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Volunteer</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Join our team of student volunteers and help bring science to communities</p>
+                    <button class="mt-4 text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors">
+                        Find Out How
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="calendar" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Request a Visit</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Invite us to your school, community center, or organization</p>
+                    <button class="mt-4 text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors">
+                        Find Out How
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="gradient-icon-wrapper p-3 rounded-xl shadow-lg inline-flex items-center justify-center">
+                        <i data-lucide="banknote" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Sponsor Us</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Help us fund experiments and travel costs to reach more kids</p>
+                    <button class="mt-4 text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors">
+                        Become a Partner
+                    </button>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-xl border border-gray-100 text-center transition-shadow hover:shadow-2xl">
+                    <div class="p-3 rounded-xl shadow-lg inline-flex items-center justify-center" style="background: linear-gradient(135deg, #f87171, #ef4444);">
+                        <i data-lucide="piggy-bank" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mt-4 mb-2">Donate</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Every dollar directly supports our mission and community outreach</p>
+                    <button class="mt-4 text-blue-600 font-semibold text-sm hover:text-blue-800 transition-colors">
+                        Give Today
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-gray-800 text-white py-16 px-4 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-10 border-b border-gray-700 pb-10 mb-10">
+                <div class="col-span-2 md:col-span-2">
+                    <a href="#" class="text-3xl font-bold tracking-tight mb-4 block">
+                        Just<span class="text-green-400">Science</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        We're a student-led initiative dedicated to making **hands-on science** accessible and inspiring for every community.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-red-500 transition-colors"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400 transition-colors"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h5 class="text-lg font-semibold mb-4 text-white">Quick Links</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#mission" class="text-gray-400 hover:text-white transition-colors">Our Mission</a></li>
+                        <li><a href="#programs" class="text-gray-400 hover:text-white transition-colors">Programs</a></li>
+                        <li><a href="#media" class="text-gray-400 hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-white transition-colors">Our Team</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="text-lg font-semibold mb-4 text-white">Get Involved</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Volunteer</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Sponsor Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Request a Visit</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Donate Now</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-span-2 md:col-span-1">
+                    <h5 class="text-lg font-semibold mb-4 text-white">Contact</h5>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center text-gray-400">
+                            <i data-lucide="mail" class="w-4 h-4 mr-3 text-green-400"></i>
+                            <a href="mailto:contact@justscience.org" class="hover:text-white">contact@justscience.org</a>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i data-lucide="map-pin" class="w-4 h-4 mr-3 text-green-400"></i>
+                            Student-Led, Nationwide
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center text-gray-400 text-xs">
+                <p>&copy; 2024 JustScience. All rights reserved.</p>
+                <p class="mt-2 sm:mt-0">Built with <span class="text-red-500">♥</span> and <span class="text-blue-400">STEM passion</span></p>
+            </div>
         </div>
     </footer>
-
-    <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-    
-        // JavaScript for mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-        
-        // Close mobile menu when a link is clicked
-        const mobileNavLinks = document.querySelectorAll('#mobile-menu a');
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-        
-        // Add a shadow to the header on scroll for better visibility
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                header.classList.add('shadow-md');
-            } else {
-                header.classList.remove('shadow-md');
-            }
-        });
-    </script>
 </body>
 </html>
